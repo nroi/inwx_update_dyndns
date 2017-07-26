@@ -1,6 +1,6 @@
 # The commands to fetch the current IPv4/IPv6
-ipv4_cmd = ["curl", "ipv4.helios.click"]
-ipv6_cmd = ["curl", "ipv6.helios.click"]
+ipv4_cmd = ["curl", "--fail", "-s", "-S", "ipv4.helios.click"]
+ipv6_cmd = ["curl", "--fail", "-s", "-S", "ipv6.helios.click"]
 
 # Check if the ip has changed after 10 seconds.
 # Note that this script is not going to send a new HTTP request every
