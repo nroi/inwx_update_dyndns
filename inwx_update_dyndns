@@ -1,3 +1,25 @@
 #!/usr/bin/env python3
 
-import toml
+from toml import toml
+from time import sleep
+import requests
+import subprocess
+
+with open("/etc/inwx_update_dyndns.toml") as f:
+    settings = toml.loads(f.read())
+
+
+ipv4 = None
+ipv6 = None
+while True:
+    new_ipv4 = subprocess.check_output(settings["ipv4_cmd"]).decode('ascii').strip()
+    new_ipv6 = subprocess.check_output(settings["ipv6_cmd"]).decode('ascii').strip()
+    update_required = new_ipv4 != ipv4 or new_ipv6 != ipv6
+    if update_required:
+        url = "https://dyndns.inwx.com/nic/update?myip={}&myipv6={}".format(new_ipv4, new_ipv6)
+        for account in settings["account"]:
+            r = requests.post(url, auth=(account["username"], account["password"]))
+            print("inwx server replied:", r.text)
+    ipv4 = new_ipv4
+    ipv6 = new_ipv6
+    sleep(settings["sleep_interval"])
