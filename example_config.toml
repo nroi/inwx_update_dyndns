@@ -1,0 +1,19 @@
+# The commands to fetch the current IPv4/IPv6
+ipv4_cmd = ["curl", "ipv4.helios.click"]
+ipv6_cmd = ["curl", "ipv6.helios.click"]
+
+# Check if the ip has changed after 10 seconds.
+# Note that this script is not going to send a new HTTP request every
+# sleep_interval seconds, instead, it will run the command mentioned above. If
+# the IP has not changed, no new HTTP request is sent.
+sleep_interval = 10
+
+# Your accounts are listed at inwx.com -> Nameserver -> DynDNS
+[[account]]
+username = "my-username"
+password = "topsecret"
+
+# If you have more than one account, just add additional [[account]]s like so:
+# [[account]]
+# username = "another username"
+# password = "confidential"
