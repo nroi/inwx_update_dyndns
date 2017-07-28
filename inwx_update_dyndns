@@ -25,4 +25,4 @@ while True:
         sleep(settings["sleep_interval"])
     except subprocess.CalledProcessError:
         # Exception might be raised if the server is temporarily unreachable.
-        sleep(60 * 10)
+        sleep(60 * 3)
