@@ -1,0 +1,11 @@
+[Unit]
+Description=Update A and AAAA records for your INWX dyndns account
+
+[Service]
+ExecStart=/usr/bin/inwx_update_dyndns
+DynamicUser=true
+# Python may crash upon startup if $HOME is not set.
+Environment=HOME=/tmp
+
+[Install]
+WantedBy=multi-user.target
