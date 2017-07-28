@@ -1,5 +1,5 @@
 [Unit]
-Description=Update A and AAAA records for your INWX dyndns account
+Description=Update A and AAAA records for your INWX DynDNS account
 Wants=network-online.target
 After=network-online.target
 
