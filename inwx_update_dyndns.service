@@ -1,5 +1,7 @@
 [Unit]
 Description=Update A and AAAA records for your INWX dyndns account
+Wants=network-online.target
+After=network-online.target
 
 [Service]
 ExecStart=/usr/bin/inwx_update_dyndns
