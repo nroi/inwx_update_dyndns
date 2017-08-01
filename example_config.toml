@@ -8,6 +8,9 @@ ipv6_cmd = ["curl", "--fail", "-s", "-S", "ipv6.helios.click"]
 # the IP has not changed, no new HTTP request is sent.
 sleep_interval = 10
 
+# Set this to false if no IPv6 should be sent to INWX.
+ipv6_enabled = true
+
 # Your accounts are listed at inwx.com -> Nameserver -> DynDNS
 [[account]]
 username = "my-username"

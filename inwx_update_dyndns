@@ -8,15 +8,19 @@ import subprocess
 with open("/etc/inwx_update_dyndns.toml") as f:
     settings = toml.loads(f.read())
 
+ipv6_enabled = settings["ipv6_enabled"]
 ipv4 = None
 ipv6 = None
 while True:
     try:
         new_ipv4 = subprocess.check_output(settings["ipv4_cmd"]).decode('ascii').strip()
-        new_ipv6 = subprocess.check_output(settings["ipv6_cmd"]).decode('ascii').strip()
-        update_required = new_ipv4 != ipv4 or new_ipv6 != ipv6
+        if ipv6_enabled:
+            new_ipv6 = subprocess.check_output(settings["ipv6_cmd"]).decode('ascii').strip()
+        update_required = new_ipv4 != ipv4 or (ipv6_enabled and new_ipv6 != ipv6)
         if update_required:
-            url = "https://dyndns.inwx.com/nic/update?myip={}&myipv6={}".format(new_ipv4, new_ipv6)
+            url = "https://dyndns.inwx.com/nic/update?myip={}".format(new_ipv4)
+            if ipv6_enabled:
+                url += "&myipv6={}".format(new_ipv6)
             for account in settings["account"]:
                 r = requests.post(url, auth=(account["username"], account["password"]))
                 print("inwx server replied:", r.text)
