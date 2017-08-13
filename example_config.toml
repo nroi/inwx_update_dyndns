@@ -1,9 +1,21 @@
-# The commands to fetch the current IPv4/IPv6
-ipv4_cmd = ["curl", "-4", "--fail", "-s", "-S", "http://ipv4.helios.click"]
-ipv6_cmd = ["curl", "-6", "--fail", "-s", "-S", "http://ipv6.helios.click"]
+# The commands to fetch the current IPv4/IPv6.
+# For both IPv4 and IPv6, a list of commands is defined. The script attempts to
+# obtain a valid IP with the first command. If successful (i.e., the script
+# returned with status 0 and the result is a valid IPv4/IPv6), this IP is used,
+# otherwise, the next command is tried.
+ipv4_commands = [
+   ["curl", "-4", "--fail", "-s", "-S", "http://ipv4.xnet.space"],     # primary command
+   ["curl", "-4", "--fail", "-s", "-S", "http://ipv4.helios.click"],   # fallback
+   ["curl", "-4", "--fail", "-s", "-S", "http://ipv4.ident.me"],       # fallback
+]
+ipv6_commands = [
+    ["curl", "-6", "--fail", "-s", "-S", "http://ipv6.xnet.space"],    # primary command
+    ["curl", "-6", "--fail", "-s", "-S", "http://ipv6.helios.click"],  # fallback
+    ["curl", "-6", "--fail", "-s", "-S", "http://ipv6.ident.me"],      # fallback
+]
 
 # Check if the ip has changed after 10 seconds.
-# Note that this script is not going to send a new HTTP request every
+# Note that this script is not going to send a new HTTP request to INWX every
 # sleep_interval seconds, instead, it will run the command mentioned above. If
 # the IP has not changed, no new HTTP request is sent.
 sleep_interval = 10
