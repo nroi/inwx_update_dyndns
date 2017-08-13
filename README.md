@@ -1,4 +1,4 @@
-# inwx_update_dyndns
+# inwx\_update\_dyndns
 
 A python script which checks at regular intervals if your IPs (IPv4 and IPv6) have changed. If changes are
 detected, an HTTP POST request is sent to inwx.com in order to update the A and AAAA record.
