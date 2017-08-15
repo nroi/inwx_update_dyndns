@@ -20,6 +20,11 @@ ipv6_commands = [
 # the IP has not changed, no new HTTP request is sent.
 sleep_interval = 10
 
+# If all commands failed to obtain a valid IP address, wait 3 minutes before
+# retrying aggain. This setting is used to avoid spamming log files when there
+# is no internet connectivity temporarily.
+retry_after = 180
+
 # Set this to false if no IPv6 should be sent to INWX.
 ipv6_enabled = true
 

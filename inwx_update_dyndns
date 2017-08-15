@@ -7,9 +7,6 @@ from time import sleep
 import toml
 import requests
 
-with open("/etc/inwx_update_dyndns.toml") as f:
-    settings = toml.loads(f.read())
-
 def obtain_ip(commands, version):
     command, *fallbacks = commands
     cmd_string = " ".join(command)
@@ -24,11 +21,16 @@ def obtain_ip(commands, version):
         print(error_str.format(cmd_string, e), file=sys.stderr)
         if fallbacks:
             return obtain_ip(fallbacks, version)
+        else:
+            raise e
 
+with open("/etc/inwx_update_dyndns.toml") as f:
+    settings = toml.loads(f.read())
 
 ipv6_enabled = settings["ipv6_enabled"]
 ipv4_commands = settings["ipv4_commands"]
 ipv6_commands = settings["ipv6_commands"]
+retry_after = settings["retry_after"]
 if not ipv4_commands:
     print("At least one ipv4_command must be defined.", sys.stderr)
 if not ipv6_commands:
@@ -52,6 +54,7 @@ while True:
         ipv4 = new_ipv4
         ipv6 = new_ipv6
         sleep(settings["sleep_interval"])
-    except subprocess.CalledProcessError:
-        # Exception might be raised if the server is temporarily unreachable.
-        sleep(60 * 3)
+    except:
+        # Exception might be raised if there is no internet connectivity temporarily.
+        print("All commands failed to obtain a valid IP address.", file=sys.stderr)
+        sleep(retry_after)
