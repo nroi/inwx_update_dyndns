@@ -29,7 +29,7 @@ with open("/etc/inwx_update_dyndns.toml") as f:
 
 ipv6_enabled = settings["ipv6_enabled"]
 ipv4_commands = settings["ipv4_commands"]
-ipv6_commands = settings["ipv6_commands"]
+ipv6_commands = settings["ipv6_commands"] if ipv6_enabled else None
 retry_after = settings["retry_after"]
 if not ipv4_commands:
     print("At least one ipv4_command must be defined.", sys.stderr)
