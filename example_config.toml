@@ -2,7 +2,7 @@
 # For both IPv4 and IPv6, a list of commands is defined. The script attempts to
 # obtain a valid IP with the first command. If successful (i.e., the script
 # returned with status 0 and the result is a valid IPv4/IPv6), this IP is used,
-# otherwise, the next command is tried.
+# Otherwise, the next command is tried.
 ipv4_commands = [
    ["curl", "-4", "--fail", "-s", "-S", "http://ipv4.xnet.space"],     # primary command
    ["curl", "-4", "--fail", "-s", "-S", "http://ipv4.helios.click"],   # fallback
@@ -16,13 +16,13 @@ ipv6_commands = [
 
 # Check if the IP has changed after 10 seconds.
 # Note that this script is not going to send a new HTTP request to INWX every
-# sleep_interval seconds, instead, it will run the command mentioned above. If
+# sleep_interval seconds, instead, it will run the commands mentioned above. If
 # the IP has not changed, no new HTTP request is sent.
 sleep_interval = 10
 
 # If all commands failed to obtain a valid IP address, wait 3 minutes before
-# retrying aggain. This setting is used to avoid spamming log files when there
-# is no internet connectivity temporarily.
+# retrying. This setting is used to avoid spamming log files when there is no
+# internet connectivity temporarily.
 retry_after = 180
 
 # Set this to false if no IPv6 should be sent to INWX.
@@ -33,7 +33,7 @@ ipv6_enabled = true
 username = "my-username"
 password = "topsecret"
 
-# If you have more than one account, just add additional [[account]]s like so:
+# If you have more than one account, just add additional accounts like so:
 # [[account]]
 # username = "another username"
 # password = "confidential"
