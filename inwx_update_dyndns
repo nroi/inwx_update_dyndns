@@ -32,9 +32,9 @@ ipv4_commands = settings["ipv4_commands"]
 ipv6_commands = settings["ipv6_commands"] if ipv6_enabled else None
 retry_after = settings["retry_after"]
 if not ipv4_commands:
-    print("At least one ipv4_command must be defined.", sys.stderr)
+    print("At least one ipv4_command must be defined.", file=sys.stderr)
 if not ipv6_commands:
-    print("At least one ipv6_command must be defined.", sys.stderr)
+    print("At least one ipv6_command must be defined.", file=sys.stderr)
 ipv4 = None
 ipv6 = None
 
