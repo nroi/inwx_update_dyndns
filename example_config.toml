@@ -1,20 +1,25 @@
+# Set this to false if no IPv6 should be sent to INWX.
+ipv6_enabled = true
+
 # The commands to fetch the current IPv4/IPv6.
 # For both IPv4 and IPv6, a list of commands is defined. The script attempts to
-# obtain a valid IP with the first command. If successful (i.e., the script
+# obtain a valid IP with the first command. If successful (i.e., the command
 # returned with status 0 and the result is a valid IPv4/IPv6), this IP is used,
-# Otherwise, the next command is tried.
+# otherwise, the next command is tried.
 ipv4_commands = [
    ["curl", "-4", "--fail", "-s", "-S", "http://ipv4.xnet.space"],     # primary command
    ["curl", "-4", "--fail", "-s", "-S", "http://ipv4.helios.click"],   # fallback
    ["curl", "-4", "--fail", "-s", "-S", "http://ipv4.ident.me"],       # fallback
 ]
+# If ipv6_enabled was set to false, this setting is ignored: You may remove it,
+# comment it or leave it as it is.
 ipv6_commands = [
     ["curl", "-6", "--fail", "-s", "-S", "http://ipv6.xnet.space"],    # primary command
     ["curl", "-6", "--fail", "-s", "-S", "http://ipv6.helios.click"],  # fallback
     ["curl", "-6", "--fail", "-s", "-S", "http://ipv6.ident.me"],      # fallback
 ]
 
-# Check if the IP has changed after 10 seconds.
+# Check if the IP has changed every 10 seconds.
 # Note that this script is not going to send a new HTTP request to INWX every
 # sleep_interval seconds, instead, it will run the commands mentioned above. If
 # the IP has not changed, no new HTTP request is sent.
@@ -24,9 +29,6 @@ sleep_interval = 10
 # retrying. This setting is used to avoid spamming log files when there is no
 # internet connectivity temporarily.
 retry_after = 180
-
-# Set this to false if no IPv6 should be sent to INWX.
-ipv6_enabled = true
 
 # Your accounts are listed at inwx.com -> Nameserver -> DynDNS
 [[account]]
