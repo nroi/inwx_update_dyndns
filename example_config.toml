@@ -8,14 +8,12 @@ ipv6_enabled = true
 # otherwise, the next command is tried.
 ipv4_commands = [
    ["curl", "-4", "--fail", "-s", "-S", "http://ipv4.xnet.space"],     # primary command
-   ["curl", "-4", "--fail", "-s", "-S", "http://ipv4.helios.click"],   # fallback
    ["curl", "-4", "--fail", "-s", "-S", "http://ipv4.ident.me"],       # fallback
 ]
 # If ipv6_enabled was set to false, this setting is ignored: You may remove it,
 # comment it or leave it as it is.
 ipv6_commands = [
     ["curl", "-6", "--fail", "-s", "-S", "http://ipv6.xnet.space"],    # primary command
-    ["curl", "-6", "--fail", "-s", "-S", "http://ipv6.helios.click"],  # fallback
     ["curl", "-6", "--fail", "-s", "-S", "http://ipv6.ident.me"],      # fallback
 ]
 
